@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+</head>
+<body>
+
+<script type="text/javascript">
+  function validCheck() {
+    var pw = document.getElementById('pw').value;
+    var pwc = document.getElementById('pwc').value;
+    if(pw.length<4 || pw.length>16){
+      document.getElementById('wrongLen').innerHTML = "비밀번호는 4~16자만 입력 가능합니다"
+      return false
+    }
+    if(pw != pwc) {
+      document.getElementById('notMatch').innerHTML = "비밀번호가 일치 하지 않습니다"
+      return false
+    }
+    return true
+  }
+</script>
+
+<h1>회원가입</h1>
+<form method="post" th:action="@{/signup}" onsubmit="return validCheck()">
+  <div>
+    <input type="email" id="email" name="email" placeholder="email">
+    <span th:text="${emailError}"></span>
+  </div>
+  <div>
+    <input type="password" id="pw" name="password" placeholder="password">
+    <span th:text="${passwordError}"></span>
+    <span id="wrongLen"></span>
+  </div>
+  <div>
+    <input type="password" id="pwc" name="passwordCheck" placeholder="password check">
+    <span id="notMatch"></span>
+  </div>
+  <input type="submit" value="회원가입">
+</form>
+<button type="button" onclick="location.href='login'">로그인하러가기</button>
+</body>
+</html>

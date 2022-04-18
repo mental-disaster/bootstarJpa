@@ -1,8 +1,10 @@
-package com.example.bootstar.service;
+package com.example.bootstarJpa.service;
 
-import com.example.bootstar.domain.User;
-import com.example.bootstar.mapper.UserMapper;
+import com.example.bootstarJpa.model.User;
+import com.example.bootstarJpa.model.vo.UserVo;
+import com.example.bootstarJpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,15 +19,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
-    final UserMapper userMapper;
+    private final UserRepository userRepository;
 
     //회원가입 유저 저장
     @Transactional
-    public void joinUser(User user){
+    public void joinUser(UserVo vo){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setAuth("USER");
-        userMapper.saveUser(user);
+        vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+        vo.setAuth("USER");
+        User user = new User(vo);
+        userRepository.save(user);
     }
 
     //회원가입 유효성 검증
@@ -40,9 +43,13 @@ public class UserService implements UserDetailsService {
     }
 
     //로그인 아이디 추출
-    @Override
-    public User loadUserByUsername(String username) {
-        User user = userMapper.getUserAccount(username);
+    public User loadUserByEmail(String email) {
+        User user = userRepository.findByEmail(email);
         return user;
+    }
+
+    @Override
+    public User loadUserByUsername(String email){
+        return userRepository.findByEmail(email);
     }
 }

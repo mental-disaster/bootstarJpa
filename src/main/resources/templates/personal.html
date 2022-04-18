@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>personal</title>
+</head>
+<body>
+<h1>개인페이지</h1>
+어서오세요
+<div><span>[[${user.email}]] 님</span></div>
+<button type="button" onclick="location.href='hello'">메인화면</button>
+<button type="button" onclick="location.href='logout'">로그아웃</button>
+<form th:action="@{/post}" method="post" enctype="multipart/form-data">
+    <input type="file" name="imgData" accept="image/*">
+    <textarea name="caption" placeholder="내용을 입력하세요" cols="30" rows="3"></textarea>
+    <button type="submit">게시하기</button>
+    <div th:text="${imageError}"></div>
+</form>
+<table  th:each="post:${posts}">
+    <tr>
+        <td th:text="${post.email}"></td>
+        <td th:text="${post.createdAt}"></td>
+        <td th:text="${post.updatedAt}"></td>
+    </tr>
+    <tr>
+        <td><img width="300" th:src="@{'/post/image/'+${post.image}}"/></td>
+    </tr>
+    <tr>
+        <td th:text="${post.caption}"></td>
+    </tr>
+    <tr>
+        <td>
+            <form th:action="@{'/post/'+${post.id}}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_method" value="put"/>
+                <input type="file" name="imgData" accept="image/*">
+                <input type="text" name="caption" id="caption" placeholder="수정할 내용을 입력하십시오"/>
+                <input type="submit" value="수정하기"/>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{'/post/'+${post.id}}" th:method="delete">
+                <input type="hidden" name="_method" value="delete"/>
+                <input type="submit" value="삭제하기"/>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
