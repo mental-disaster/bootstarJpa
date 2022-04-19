@@ -2,9 +2,13 @@ package com.example.bootstarJpa.repository;
 
 import com.example.bootstarJpa.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-    <Post extends Long> Post save(Post entity);
+    List<Post> findAllByUser_Id(Long id);
 
-
+    void deleteById(Long id);
 }

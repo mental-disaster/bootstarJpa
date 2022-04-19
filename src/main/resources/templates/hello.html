@@ -17,18 +17,18 @@
 </form>
 <table  th:each="post:${posts}">
     <tr>
-        <td th:text="${post.email}"></td>
+        <td th:text="${post.user.email}"></td>
         <td th:text="${post.createdAt}"></td>
         <td th:text="${post.updatedAt}"></td>
     </tr>
     <tr>
-        <td><img width="300" th:src="@{'/post/image/'+${post.image}}"/></td>
+        <td><img width="300" th:src="@{'/image/'+${post.img.id}}"/></td>
     </tr>
     <tr>
         <td th:text="${post.caption}"></td>
     </tr>
     <tr>
-        <td th:if="${post.authorId}==${user.id}">
+        <td th:if="${post.user.id}==${user.id}">
             <form th:action="@{'/post/'+${post.id}}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="put"/>
                 <input type="file" name="imgData" accept="image/*">
@@ -36,8 +36,8 @@
                 <input type="submit" value="수정하기"/>
             </form>
         </td>
-        <td th:if="${post.author_id}==${user.user_id}">
-            <form th:action="@{'/post/'+${post.post_id}}" th:method="delete">
+        <td th:if="${post.user.id}==${user.id}">
+            <form th:action="@{'/post/'+${post.id}}" th:method="delete">
                 <input type="hidden" name="_method" value="delete"/>
                 <input type="submit" value="삭제하기"/>
             </form>

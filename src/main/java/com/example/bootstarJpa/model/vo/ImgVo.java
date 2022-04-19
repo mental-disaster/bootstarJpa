@@ -10,4 +10,5 @@ public class ImgVo {
     private String path;
     private String originalName;
     private Long originalSize;
+    private PostVo postVo;
 }

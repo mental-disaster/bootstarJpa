@@ -1,7 +1,9 @@
 package com.example.bootstarJpa.controller;
 
+import com.example.bootstarJpa.model.Post;
 import com.example.bootstarJpa.model.User;
 import com.example.bootstarJpa.model.vo.UserVo;
+import com.example.bootstarJpa.service.PostService;
 import com.example.bootstarJpa.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.Map;
 public class UserController {
 
     final UserService userService;
+    final PostService postService;
 
     //메인화면(로그인 화면)
     @GetMapping("")
@@ -70,23 +72,23 @@ public class UserController {
         return "redirect:/login";
     }
 
-//    //로그인 후 메인화면(모든 유저 타임라인)
-//    @GetMapping("/hello")
-//    public String userAccess(Model model, Authentication authentication){
-//        User user = (User) authentication.getPrincipal();
-//        model.addAttribute("user", user);
-//        List<Map<String, Object>> posts = postService.selectAllPost();
-//        model.addAttribute("posts",posts);
-//        return "/hello";
-//    }
-//
-//    //개인 타임라인
-//    @GetMapping("/personal")
-//    public String personalPage(Model model, Authentication authentication){
-//        User user = (User) authentication.getPrincipal();
-//        model.addAttribute("user", user);
-//        List<Map<String, Object>> posts = postService.selectPostByUserId(user.getUser_id());
-//        model.addAttribute("posts",posts);
-//        return "/personal";
-//    }
+    //로그인 후 메인화면(모든 유저 타임라인)
+    @GetMapping("/hello")
+    public String userAccess(Model model, Authentication authentication){
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("user", user);
+        List<Post> posts = postService.selectAllPost();
+        model.addAttribute("posts",posts);
+        return "/hello";
+    }
+
+    //개인 타임라인
+    @GetMapping("/personal")
+    public String personalPage(Model model, Authentication authentication){
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("user", user);
+        List<Post> posts = postService.selectPostByUserId(user.getId());
+        model.addAttribute("posts",posts);
+        return "/personal";
+    }
 }

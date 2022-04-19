@@ -13,15 +13,16 @@ public class Img {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long postId;
     private String name;
     private String path;
     private String originalName;
     private Long originalSize;
+    @OneToOne
+    @JoinColumn
+    private Post post;
 
 
     public Img(ImgVo vo){
-        this.postId = vo.getPostId();
         this.name = vo.getName();
         this.path = vo.getPath();
         this.originalName = vo.getOriginalName();

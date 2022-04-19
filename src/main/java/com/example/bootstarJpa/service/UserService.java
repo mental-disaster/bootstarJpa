@@ -4,7 +4,6 @@ import com.example.bootstarJpa.model.User;
 import com.example.bootstarJpa.model.vo.UserVo;
 import com.example.bootstarJpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

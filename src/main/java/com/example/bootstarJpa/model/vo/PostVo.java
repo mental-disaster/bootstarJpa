@@ -12,4 +12,5 @@ public class PostVo {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private ImgVo imgVo;
+    private UserVo userVo;
 }
