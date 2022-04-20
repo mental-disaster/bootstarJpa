@@ -4,8 +4,8 @@ import com.example.bootstarJpa.model.Img;
 import com.example.bootstarJpa.model.Post;
 import com.example.bootstarJpa.model.User;
 import com.example.bootstarJpa.model.vo.ImgVo;
-import com.example.bootstarJpa.model.vo.PostVo;
 import com.example.bootstarJpa.repository.ImgRepository;
+import com.example.bootstarJpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -67,16 +67,19 @@ public class ImgService {
             e.printStackTrace();
         }
 
-        PostVo postVo = new PostVo();
-        postVo.setId(post.getId());
-        postVo.setUser(user);
-
-        imgVo.setPost(new Post(postVo));
+        imgVo.setPost(post);
         imgVo.setName(destFileName);
         imgVo.setPath(fullUrl);
         imgVo.setOriginalName(srcFileName);
         imgVo.setOriginalSize(destFile.length());
 
         imgRepository.save(new Img(imgVo));
+    }
+
+    @Transactional
+    public void deleteImg(Post post){
+        imgRepository.deleteById(post.getImg().getId());
+        post.removeImg();
+        imgRepository.flush();
     }
 }

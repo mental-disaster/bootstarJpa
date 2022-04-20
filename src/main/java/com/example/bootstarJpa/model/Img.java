@@ -21,7 +21,6 @@ public class Img {
     @JoinColumn
     private Post post;
 
-
     public Img(ImgVo vo){
         this.id = vo.getId();
         this.name = vo.getName();

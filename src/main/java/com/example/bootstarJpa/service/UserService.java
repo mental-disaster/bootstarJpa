@@ -42,9 +42,7 @@ public class UserService implements UserDetailsService {
     }
 
     //로그인 아이디 추출
-    public User loadUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    public User loadUserByEmail(String email) { return userRepository.findByEmail(email); }
 
     @Override
     public User loadUserByUsername(String email){

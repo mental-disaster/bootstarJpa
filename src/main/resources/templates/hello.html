@@ -29,10 +29,11 @@
     </tr>
     <tr>
         <td th:if="${post.user.id}==${user.id}">
-            <form th:action="@{'/post/'+${post.id}}" method="put" enctype="multipart/form-data">
+            <form th:action="@{'/post'}" th:method="put" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="put"/>
                 <input type="file" name="imgData" accept="image/*">
-                <input type="text" name="caption" id="caption" placeholder="수정할 내용을 입력하십시오"/>
+                <input type="hidden" name="id" th:value="${post.id}">
+                <input type="text" name="caption" placeholder="수정할 내용을 입력하십시오"/>
                 <button type="submit">수정하기</button>
             </form>
         </td>

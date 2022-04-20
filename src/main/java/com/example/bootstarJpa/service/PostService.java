@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.File;
@@ -26,10 +27,7 @@ public class PostService {
     //게시물 생성
     @Transactional
     public Post createPost(PostVo postVo){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User) authentication.getPrincipal();
-
-        postVo.setUser(user);
+        setCurrUser(postVo);
         return postRepository.save(new Post(postVo));
     }
 
@@ -37,22 +35,18 @@ public class PostService {
     @Transactional
     public void deletePost(Long postId){
         Optional<Post> postSrc = postRepository.findById(postId);
-        Post post = postSrc.get();
+        Post post = postSrc.orElseGet(Post::new);
         File file = new File(post.getImg().getPath()+post.getImg().getName());
         file.delete();
         postRepository.deleteById(postId);
     }
 
     //게시물 수정
-//    @Transactional
-//    public void updatePost(PostVo postVo, MultipartFile imgData){
-//        Post post = postRepository.save(new Post(postVo));
-//        if(imgData != null){
-//            File file = new File(postVo.getImgVo().getPath()+"/"+postVo.getImgVo().getName());
-//            file.delete();
-//            postVo.setImgVo(imgService.saveImg(imgData, post));
-//        }
-//    }
+    @Transactional
+    public void updatePost(PostVo postVo){
+        setCurrUser(postVo);
+        postRepository.save(new Post(postVo));
+    }
 
     //게시물 읽기
     public List<Post> selectAllPost(){
@@ -61,5 +55,12 @@ public class PostService {
 
     public List<Post> selectAllPostByUserId(Long authorId){ return postRepository.findAllByUserIdOrderByCreatedAtDesc(authorId); }
 
-    public Post selectPostById(Long postId){ return postRepository.findById(postId).get(); }
+    public Post selectPostById(Long postId){ return postRepository.findById(postId).orElseGet(Post::new); }
+
+    //현 세션 유저 저장
+    private void setCurrUser(PostVo postVo){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User) authentication.getPrincipal();
+        postVo.setUser(user);
+    }
 }

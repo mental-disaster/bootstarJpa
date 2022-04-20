@@ -19,7 +19,7 @@ public class Post {
     private Timestamp updatedAt;
     @OneToOne(mappedBy = "post", cascade = CascadeType.ALL)
     private Img img;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private User user;
 
@@ -29,5 +29,9 @@ public class Post {
         this.createdAt = vo.getCreatedAt();
         this.updatedAt = vo.getUpdatedAt();
         this.user = vo.getUser();
+    }
+
+    public void removeImg(){
+        this.img = null;
     }
 }
