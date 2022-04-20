@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -45,7 +46,8 @@ public class ImgService {
         return imgFile;
     }
 
-    public ImgVo saveImg(MultipartFile imgData, Post post) {
+    @Transactional
+    public void saveImg(MultipartFile imgData, Post post) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) authentication.getPrincipal();
 
@@ -67,14 +69,14 @@ public class ImgService {
 
         PostVo postVo = new PostVo();
         postVo.setId(post.getId());
-        imgVo.setPostVo(postVo);
+        postVo.setUser(user);
+
+        imgVo.setPost(new Post(postVo));
         imgVo.setName(destFileName);
         imgVo.setPath(fullUrl);
         imgVo.setOriginalName(srcFileName);
         imgVo.setOriginalSize(destFile.length());
 
         imgRepository.save(new Img(imgVo));
-
-        return imgVo;
     }
 }

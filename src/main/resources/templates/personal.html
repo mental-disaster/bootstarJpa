@@ -23,24 +23,24 @@
         <td th:text="${post.updatedAt}"></td>
     </tr>
     <tr>
-        <td><img width="300" th:src="@{'/post/image/'+${post.img.id}}"/></td>
+        <td><img width="300" th:src="@{'/image/'+${post.img.id}}"/></td>
     </tr>
     <tr>
         <td th:text="${post.caption}"></td>
     </tr>
     <tr>
         <td>
-            <form th:action="@{'/post/'+${post.id}}" method="post" enctype="multipart/form-data">
+            <form th:action="@{'/post/'+${post.id}}" method="put" enctype="multipart/form-data">
                 <input type="hidden" name="_method" value="put"/>
                 <input type="file" name="imgData" accept="image/*">
                 <input type="text" name="caption" id="caption" placeholder="수정할 내용을 입력하십시오"/>
-                <input type="submit" value="수정하기"/>
+                <button type="submit">수정하기</button>
             </form>
         </td>
         <td>
             <form th:action="@{'/post/'+${post.id}}" th:method="delete">
                 <input type="hidden" name="_method" value="delete"/>
-                <input type="submit" value="삭제하기"/>
+                <button type="submit">삭제하기</button>
             </form>
         </td>
     </tr>

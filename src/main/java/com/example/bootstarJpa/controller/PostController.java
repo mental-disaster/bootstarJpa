@@ -1,6 +1,8 @@
 package com.example.bootstarJpa.controller;
 
+import com.example.bootstarJpa.model.Post;
 import com.example.bootstarJpa.model.vo.PostVo;
+import com.example.bootstarJpa.service.ImgService;
 import com.example.bootstarJpa.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class PostController {
 
     final PostService postService;
+    final ImgService imgService;
 
     @PostMapping("")
     public String createPost(PostVo postVo, @RequestPart MultipartFile imgData, RedirectAttributes redirectAttributes, HttpServletRequest request){
@@ -26,7 +29,9 @@ public class PostController {
             String referer = request.getHeader("Referer");
             return "redirect:" + referer;
         }
-        postService.createPost(postVo,imgData);
+
+        Post post = postService.createPost(postVo);
+        imgService.saveImg(imgData, post);
 
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
@@ -35,14 +40,15 @@ public class PostController {
     @DeleteMapping("/{postId}")
     public String deletePost(@PathVariable("postId")Long id, HttpServletRequest request){
         postService.deletePost(id);
+
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
     }
 
-    @PutMapping("/{post_id}")
-    public String updatePost(PostVo postVo, @RequestPart MultipartFile imgData, HttpServletRequest request){
-        postService.updatePost(postVo, imgData);
-        String referer = request.getHeader("Referer");
-        return "redirect:" + referer;
-    }
+//    @PutMapping("/{post_id}")
+//    public String updatePost(PostVo postVo, @RequestPart MultipartFile imgData, HttpServletRequest request){
+//        postService.updatePost(postVo, imgData);
+//        String referer = request.getHeader("Referer");
+//        return "redirect:" + referer;
+//    }
 }

@@ -1,11 +1,12 @@
 package com.example.bootstarJpa.model.vo;
 
-import com.example.bootstarJpa.model.User;
+import com.example.bootstarJpa.model.Post;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 public class UserVo {
@@ -16,5 +17,5 @@ public class UserVo {
     private String password;
     private Timestamp createdAt;
     private String auth;
-    private PostVo postVo;
+    private List<Post> posts;
 }

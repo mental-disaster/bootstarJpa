@@ -24,12 +24,14 @@ public class User implements UserDetails{
     private String password;
     private Timestamp createdAt;
     private String auth;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Post> post;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Post> posts;
 
     public User(UserVo vo){
+        this.id = vo.getId();
         this.email = vo.getEmail();
         this.password = vo.getPassword();
+        this.createdAt = vo.getCreatedAt();
         this.auth = vo.getAuth();
     }
 

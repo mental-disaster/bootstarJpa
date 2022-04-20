@@ -87,7 +87,7 @@ public class UserController {
     public String personalPage(Model model, Authentication authentication){
         User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
-        List<Post> posts = postService.selectPostByUserId(user.getId());
+        List<Post> posts = postService.selectAllPostByUserId(user.getId());
         model.addAttribute("posts",posts);
         return "/personal";
     }

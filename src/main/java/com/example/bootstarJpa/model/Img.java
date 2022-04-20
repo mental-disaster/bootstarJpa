@@ -23,9 +23,11 @@ public class Img {
 
 
     public Img(ImgVo vo){
+        this.id = vo.getId();
         this.name = vo.getName();
         this.path = vo.getPath();
         this.originalName = vo.getOriginalName();
         this.originalSize = vo.getOriginalSize();
+        this.post = vo.getPost();
     }
 }

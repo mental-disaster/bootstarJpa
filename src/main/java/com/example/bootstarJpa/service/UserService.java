@@ -43,8 +43,7 @@ public class UserService implements UserDetailsService {
 
     //로그인 아이디 추출
     public User loadUserByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        return user;
+        return userRepository.findByEmail(email);
     }
 
     @Override

@@ -24,6 +24,10 @@ public class Post {
     private User user;
 
     public Post(PostVo vo){
+        this.id = vo.getId();
         this.caption = vo.getCaption();
+        this.createdAt = vo.getCreatedAt();
+        this.updatedAt = vo.getUpdatedAt();
+        this.user = vo.getUser();
     }
 }
