@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="uploadFragment">
+    <form th:action="@{/post}" method="post" enctype="multipart/form-data">
+        <input type="file" name="imgData" accept="image/*">
+        <textarea name="caption" placeholder="내용을 입력하세요" cols="30" rows="3"></textarea>
+        <button type="submit">게시하기</button>
+        <div th:text="${imageError}"></div>
+    </form>
+</th:block>
+</body>
+</html>

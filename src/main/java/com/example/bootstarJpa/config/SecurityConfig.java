@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception{
         http
             .authorizeRequests()
-                .antMatchers("/uploadFiles/**").permitAll()
+                .antMatchers("/resources/**").permitAll()
                 .antMatchers("/signup","/login","/loginFail").anonymous()
                 .antMatchers("/hello").hasAnyAuthority("USER","ADMIN")
                 .anyRequest().authenticated()

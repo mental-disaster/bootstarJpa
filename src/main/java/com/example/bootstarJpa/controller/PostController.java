@@ -5,7 +5,6 @@ import com.example.bootstarJpa.model.vo.PostVo;
 import com.example.bootstarJpa.service.ImgService;
 import com.example.bootstarJpa.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

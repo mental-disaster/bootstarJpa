@@ -5,7 +5,6 @@ import com.example.bootstarJpa.model.Post;
 import com.example.bootstarJpa.model.User;
 import com.example.bootstarJpa.model.vo.ImgVo;
 import com.example.bootstarJpa.repository.ImgRepository;
-import com.example.bootstarJpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
