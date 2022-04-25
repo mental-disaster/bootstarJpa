@@ -2,36 +2,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <th:block th:fragment="timelineFragment">
-    <table  th:each="post:${posts}">
-        <tr>
-            <td th:text="${post.user.email}"></td>
-            <td th:text="${post.createdAt}"></td>
-            <td th:text="${post.updatedAt}"></td>
-        </tr>
-        <tr>
-            <td><img width="300" th:src="@{'/image/'+${post.img.id}}"/></td>
-        </tr>
-        <tr>
-            <td th:text="${post.caption}"></td>
-        </tr>
-        <tr>
-            <td th:if="${post.user.id}==${user.id}">
+    <div class="container" id="TLContainer" th:each="post:${posts}">
+        <div class="row">
+            <div class="col" id="author">
+                <span th:text="${post.user.email}"></span>
+            </div>
+        </div>
+        <div class="row justify-content-end row-cols-4" id="date">
+            <div class="col">
+                <span th:text="${post.createdAt}"></span>
+            </div>
+            <div class="col">
+                <span th:text="${post.updatedAt}"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img width="300" th:src="@{'/image/'+${post.img.id}}"/>
+            </div>
+        </div>
+        <div class="row" id="caption">
+            <div class="col">
+                <span style="min-width: 300px" th:text="${post.caption}"></span>
+            </div>
+        </div>
+        <div class="row" id="update">
+            <div class="col" th:if="${post.user.id}==${user.id}">
                 <form th:action="@{'/post'}" th:method="put" enctype="multipart/form-data">
                     <input type="hidden" name="_method" value="put"/>
-                    <input type="file" name="imgData" accept="image/*">
+                    <input type="file" name="imgData" size="" accept="image/*">
                     <input type="hidden" name="id" th:value="${post.id}">
-                    <input type="text" name="caption" placeholder="수정할 내용을 입력하십시오"/>
+                    <input type="text" name="caption" maxlength="50" placeholder="수정할 내용을 입력하십시오">
                     <button type="submit">수정하기</button>
                 </form>
-            </td>
-            <td th:if="${post.user.id}==${user.id}">
+            </div>
+        </div>
+        <div class="row" id="delete">
+            <div class="col" th:if="${post.user.id}==${user.id}">
                 <form th:action="@{'/post/'+${post.id}}" th:method="delete">
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="submit">삭제하기</button>
                 </form>
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </th:block>
 </body>
 </html>

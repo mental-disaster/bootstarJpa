@@ -48,6 +48,11 @@ public class PostController {
     @PutMapping("")
     public String updatePost(PostVo postVo, @RequestPart MultipartFile imgData, HttpServletRequest request){
         String sourceFileName = imgData.getOriginalFilename();
+        String referer = request.getHeader("Referer");
+        if(sourceFileName.equals("") && postVo.getCaption().equals("")){
+            return "redirect:" + referer;
+        }
+
         Post post = postService.selectPostById(postVo.getId());
         if(!sourceFileName.equals("")){
             File file = new File(post.getImg().getPath()+post.getImg().getName());
@@ -58,7 +63,6 @@ public class PostController {
         
         postService.updatePost(postVo);
 
-        String referer = request.getHeader("Referer");
         return "redirect:" + referer;
     }
 }

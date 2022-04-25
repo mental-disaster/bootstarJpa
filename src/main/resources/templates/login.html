@@ -1,15 +1,37 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Login</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+  <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+  <link th:href="@{/css/sign.css}" rel="stylesheet"/>
 </head>
-<body>
-<h1>로그인</h1>
-<form th:action="@{/loginPro}" method="post">
-  <input type="email" name="email" placeholder="email">
-  <input type="password" name="password" placeholder="password">
-  <input type="submit" value="로그인">
-</form>
-<button type="button" onclick="location.href='signup'">회원가입하러가기</button>
+<body class="text-center">
+
+<main class="form-signin">
+
+  <form th:action="@{/loginPro}" method="post">
+    <h1 class="h3 mb-3 fw-normal">로그인</h1>
+
+    <div class="form-floating">
+      <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" name="password" class="form-control" id="floatingPassword"style="margin-bottom: 10px"  placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+  </form>
+  <button class="w-100 btn btn-lg btn-info" type="button" onclick="location.href='signup'">회원가입하러가기</button>
+</main>
 </body>
 </html>

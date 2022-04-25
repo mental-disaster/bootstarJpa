@@ -5,6 +5,7 @@ import com.example.bootstarJpa.model.User;
 import com.example.bootstarJpa.model.vo.PostVo;
 import com.example.bootstarJpa.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,6 +56,10 @@ public class PostService {
     public List<Post> selectAllPostByUserId(Long authorId){ return postRepository.findAllByUserIdOrderByCreatedAtDesc(authorId); }
 
     public Post selectPostById(Long postId){ return postRepository.findById(postId).orElseGet(Post::new); }
+
+    public List<Post> selectLimitPost(int page, int limit){ return postRepository.findLimitPost(PageRequest.of(page, limit)); }
+
+    public List<Post> selectLimitPostByUserId(Long authorId, int page, int limit){ return postRepository.findLimitPostByUserId(authorId, PageRequest.of(page, limit)); }
 
     //현 세션 유저 저장
     private void setCurrUser(PostVo postVo){

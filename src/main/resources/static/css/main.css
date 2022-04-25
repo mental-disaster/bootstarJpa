@@ -1,0 +1,10 @@
+body {
+    background-color: #e5eefa;
+}
+
+main {
+    margin: 0 auto;
+    align-items: center;
+    max-width: 1200px;
+    width: 90%;
+}

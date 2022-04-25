@@ -1,0 +1,20 @@
+#TLContainer {
+    margin: 20px auto 5px;
+}
+
+.row {
+    text-align: center;
+}
+
+#author {
+    text-align: left;
+}
+
+#date, #update, #delete {
+    text-align: right
+}
+
+#caption {
+    font-size: large;
+    margin: 5px 20% 10px;
+}

@@ -1,0 +1,34 @@
+#uploadForm {
+    margin: 15px auto 30px;
+}
+
+#textBlock {
+    margin: 0 auto;
+    max-width: 500px;
+    height: 130px;
+    position: relative;
+}
+
+#submitButton {
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+}
+
+#textBlock  {
+    margin-bottom: 3px;
+}
+
+.form-control-sm {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#floatingTextarea2 {
+    height: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

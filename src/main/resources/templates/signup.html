@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>회원가입</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Signup</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
+
+  <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+  <link th:href="@{/css/sign.css}" rel="stylesheet"/>
 </head>
-<body>
+<body class="text-center">
+
+<main class="form-signin">
+
+  <form th:action="@{/signup}" method="post" onsubmit="return validCheck()">
+    <h1 class="h3 mb-3 fw-normal">회원가입</h1>
+
+    <div class="form-floating">
+      <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+      <label for="floatingInput">Email address</label>
+      <span th:text="${emailError}" style="color: #dc3545"></span>
+    </div>
+    <div class="form-floating">
+      <input type="password" name="password" class="form-control" id="pw" placeholder="Password">
+      <label for="pw">Password</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" name="passwordConfirm" class="form-control" id="pwc" style="margin-bottom: 10px;" placeholder="Password Confirm">
+      <label for="pwc">Password Confirm</label>
+      <span th:text="${passwordError}" style="color: #dc3545"></span>
+      <span id="wrongLen" style="color: #dc3545"></span>
+      <span id="notMatch" style="color: #dc3545"></span>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>
+  </form>
+  <button class="w-100 btn btn-lg btn-info" type="button" style="margin-top: 3px" onclick="location.href='login'">로그인하러가기</button>
+</main>
 
 <script type="text/javascript">
   function validCheck() {
@@ -22,23 +58,5 @@
   }
 </script>
 
-<h1>회원가입</h1>
-<form method="post" th:action="@{/signup}" onsubmit="return validCheck()">
-  <div>
-    <input type="email" id="email" name="email" placeholder="email">
-    <span th:text="${emailError}"></span>
-  </div>
-  <div>
-    <input type="password" id="pw" name="password" placeholder="password">
-    <span th:text="${passwordError}"></span>
-    <span id="wrongLen"></span>
-  </div>
-  <div>
-    <input type="password" id="pwc" name="passwordCheck" placeholder="password check">
-    <span id="notMatch"></span>
-  </div>
-  <input type="submit" value="회원가입">
-</form>
-<button type="button" onclick="location.href='login'">로그인하러가기</button>
 </body>
 </html>

@@ -4,12 +4,21 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
+    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/timeline.css}" rel="stylesheet"/>
+    <link th:href="@{/css/upload.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <meta charset="UTF-8">
-    <title>hello</title>
 </head>
 <body>
-<th:block layout:fragment="welcome"></th:block>
-<th:block th:replace="fragments/upload::uploadFragment"></th:block>
-<th:block th:replace="fragments/timeline::timelineFragment"></th:block>
+<header>
+    <th:block class="header" th:replace="fragments/header::header"></th:block>
+</header>
+<main>
+    <th:block class="welcome" layout:fragment="welcome"></th:block>
+    <th:block class="upload" th:replace="fragments/upload::uploadFragment"></th:block>
+    <th:block class="timeline" th:replace="fragments/timeline::timelineFragment"></th:block>
+</main>
 </body>
 </html>
