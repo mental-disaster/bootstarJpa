@@ -3,8 +3,8 @@
 <body>
 <th:block th:fragment="header">
     <div class="container" id="headerContainer">
-        <header class="d-flex mb-3 py-3 border-bottom">
-            <img class="me-auto" width="38" height="38" th:src="@{/assets/bootstrap.svg}">
+        <header class="d-flex mb-3 py-3">
+            <img class="me-auto" id="logo" onclick="location.href='hello'" th:src="@{/assets/bootstrap.svg}">
             <button th:if="${#strings.contains(#httpServletRequest.getRequestURL(), 'hello')}" type="button" class="btn btn-outline-primary me-2" onclick="location.href='personal'">
                 개인페이지
             </button>

@@ -2,3 +2,14 @@
     max-width: 100%;
     width: 100%;
 }
+
+#headerContainer header {
+    margin: auto auto;
+    max-width: 40rem;
+}
+
+#logo {
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+}

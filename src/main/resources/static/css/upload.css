@@ -1,11 +1,11 @@
 #uploadForm {
-    margin: 15px auto 30px;
+    margin: 2rem auto 2rem;
 }
 
 #textBlock {
     margin: 0 auto;
     max-width: 500px;
-    height: 130px;
+    height: 180px;
     position: relative;
 }
 
@@ -26,7 +26,7 @@
 }
 
 #floatingTextarea2 {
-    height: 100%;
+    height: 100px;
     box-sizing: border-box;
     resize: none;
     border-top-left-radius: 0;

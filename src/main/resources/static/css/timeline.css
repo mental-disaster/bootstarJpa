@@ -1,9 +1,19 @@
 #TLContainer {
-    margin: 20px auto 5px;
+    margin: 8rem auto 2rem;
+    padding: 0.8rem 0.8rem;
+    max-width: 34rem;
 }
 
 .row {
     text-align: center;
+}
+
+img {
+    width: 20rem;
+}
+
+form {
+    size: auto;
 }
 
 #author {
@@ -20,5 +30,23 @@
 
 #caption {
     font-size: 1.3rem;
+    min-width: 18rem;
     margin: 5px 20% 10px;
+}
+
+#update .col-4 {
+    padding-right: 0;
+    align-items: center;
+}
+
+#update .col-6 input {
+    size: 100px;
+}
+
+#update .col-6 {
+    padding: 0;
+}
+
+#update .col-2 {
+    padding-left: 0;
 }

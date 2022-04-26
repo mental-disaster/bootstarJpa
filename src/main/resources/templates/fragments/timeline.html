@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <th:block th:fragment="timelineFragment">
-    <div class="container" id="TLContainer" th:each="post:${posts}">
+    <div class="container border border-3 border-info rounded-3" id="TLContainer" th:each="post:${posts}">
         <div class="row">
             <div class="col" id="author">
                 <span th:text="${post.user.email}"></span>
@@ -18,32 +18,34 @@
         </div>
         <div class="row">
             <div class="col">
-                <img width="300" th:src="'/uploadFiles/img/'+${post.user.id}+'/'+${post.img.name}"/>
+                <img th:src="@{'/image/'+${post.img.id}}"/>
             </div>
         </div>
         <div class="row" id="caption">
             <div class="col">
-                <span style="min-width: 300px" th:text="${post.caption}"></span>
+                <span th:text="${post.caption}"></span>
             </div>
         </div>
-        <div class="row" id="update">
-            <div class="col" th:if="${post.user.id}==${user.id}">
-                <form th:action="@{'/post'}" th:method="put" enctype="multipart/form-data">
-                    <input type="hidden" name="_method" value="put"/>
-                    <input type="file" name="imgData" size="" accept="image/*">
-                    <input type="hidden" name="id" th:value="${post.id}">
+        <form th:action="@{'/post'}" th:method="put" enctype="multipart/form-data">
+            <div class="row row-cols-3" id="update" th:if="${post.user.id}==${user.id}">
+                <input type="hidden" name="_method" value="put"/>
+                <input type="hidden" name="id" th:value="${post.id}">
+                <div class="col-3">
+                    <input type="file" name="imgData" id="imgData" size="" accept="image/*">
+                </div>
+                <div class="col-6">
                     <input type="text" name="caption" maxlength="50" placeholder="수정할 내용을 입력하십시오">
+                </div>
+                <div class="col-3">
                     <button type="submit">수정하기</button>
-                </form>
+                </div>
             </div>
-        </div>
-        <div class="row" id="delete">
-            <div class="col" th:if="${post.user.id}==${user.id}">
-                <form th:action="@{'/post/'+${post.id}}" th:method="delete">
-                    <input type="hidden" name="_method" value="delete"/>
-                    <button type="submit">삭제하기</button>
-                </form>
-            </div>
+        </form>
+        <div class="row" id="delete" th:if="${post.user.id}==${user.id}">
+            <form th:action="@{'/post/'+${post.id}}" th:method="delete">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit">삭제하기</button>
+            </form>
         </div>
     </div>
 </th:block>
