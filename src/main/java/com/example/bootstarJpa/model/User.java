@@ -1,6 +1,7 @@
 package com.example.bootstarJpa.model;
 
 import com.example.bootstarJpa.model.vo.UserVo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -22,8 +22,9 @@ public class User implements UserDetails{
     private Long id;
     private String email;
     private String password;
-    private Timestamp createdAt;
+    private String createdAt;
     private String auth;
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Post> posts;
 

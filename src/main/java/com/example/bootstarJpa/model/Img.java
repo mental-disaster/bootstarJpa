@@ -1,6 +1,7 @@
 package com.example.bootstarJpa.model;
 
 import com.example.bootstarJpa.model.vo.ImgVo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ public class Img {
     private Long originalSize;
     @OneToOne
     @JoinColumn
+    @JsonIgnore
     private Post post;
 
     public Img(ImgVo vo){

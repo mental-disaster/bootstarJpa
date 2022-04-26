@@ -2,6 +2,7 @@ package com.example.bootstarJpa.controller;
 
 import com.example.bootstarJpa.model.Post;
 import com.example.bootstarJpa.model.vo.PostVo;
+import com.example.bootstarJpa.model.vo.mapper.PostMapper;
 import com.example.bootstarJpa.service.ImgService;
 import com.example.bootstarJpa.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/post")
@@ -20,6 +23,19 @@ public class PostController {
 
     final PostService postService;
     final ImgService imgService;
+    final PostMapper postMapper;
+
+    @ResponseBody
+    @GetMapping("")
+    public List<PostVo> selectLimitPost(@RequestParam int page, @RequestParam int limit){
+        List<Post> posts = postService.selectLimitPost(page, limit);
+        System.out.println(posts.get(0).getId());
+        List<PostVo> postVos = posts.stream()
+                .map(postMapper::mapEntityVo)
+                .collect(Collectors.toList());
+        System.out.println(postVos);
+        return postVos;
+    }
 
     @PostMapping("")
     public String createPost(PostVo postVo, @RequestPart MultipartFile imgData, RedirectAttributes redirectAttributes, HttpServletRequest request) {

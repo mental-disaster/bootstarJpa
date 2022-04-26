@@ -14,7 +14,11 @@
     text-align: right
 }
 
+#date {
+    font-size: 0.8rem;
+}
+
 #caption {
-    font-size: large;
+    font-size: 1.3rem;
     margin: 5px 20% 10px;
 }

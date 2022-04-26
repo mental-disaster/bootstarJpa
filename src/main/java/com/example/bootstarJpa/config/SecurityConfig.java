@@ -23,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
                 .antMatchers("/signup","/login","/loginFail").anonymous()
-                .antMatchers("/hello").hasAnyAuthority("USER","ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

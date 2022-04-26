@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <img width="300" th:src="@{'/image/'+${post.img.id}}"/>
+                <img width="300" th:src="'/uploadFiles/img/'+${post.user.id}+'/'+${post.img.name}"/>
             </div>
         </div>
         <div class="row" id="caption">
