@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <th:block th:fragment="uploadFragment">
-    <form action="/post" id="uploadForm" method="post" enctype="multipart/form-data">
+    <form action="/post" id="uploadForm" method="post" enctype="multipart/form-data" th:if="${#strings.contains(#httpServletRequest.getRequestURL(), 'hello')} or ${posts[0].user.id}==${user.id}">
         <div id="textBlock">
             <input class="form-control form-control-sm" type="file" name="imgData" accept="image/*" required>
             <div class="form-floating">

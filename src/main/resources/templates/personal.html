@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layouts/main}">
 
 <head>
     <title>personal</title>
+    <script>
+        const personalId = window.location.pathname;
+    </script>
 </head>
 <body>
 <div layout:fragment="welcome">
-<h1>개인페이지</h1>
-어서오세요
-<div><span>[[${user.email}]] 님</span></div>
+    <div th:if="${posts[0].user.id}==${user.id}">
+        <h1>마이페이지</h1>
+        어서오세요
+        <div><span>[[${user.email}]] 님</span></div>
+    </div>
+    <div th:unless="${posts[0].user.id}==${user.id}">
+        <h1>개인페이지</h1>
+        어서오세요
+        <div><span>[[${posts[0].user.email}]] 님의 개인페이지입니다</span></div>
+    </div>
 </div>
 </body>
 </html>

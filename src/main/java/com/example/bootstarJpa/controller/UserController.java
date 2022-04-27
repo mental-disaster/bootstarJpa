@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -83,11 +84,11 @@ public class UserController {
     }
 
     //개인 타임라인
-    @GetMapping("/personal")
-    public String personalPage(Model model, Authentication authentication){
+    @GetMapping("/personal/{userId}")
+    public String personalPage(@PathVariable("userId")Long id, Model model, Authentication authentication){
         User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
-        List<Post> posts = postService.selectAllPostByUserId(user.getId());
+        List<Post> posts = postService.selectAllPostByUserId(id);
         model.addAttribute("posts",posts);
         return "/personal";
     }

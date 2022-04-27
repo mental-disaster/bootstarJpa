@@ -5,7 +5,7 @@
     <div class="container border border-3 border-info rounded-3" id="TLContainer" th:each="post:${posts}">
         <div class="row">
             <div class="col" id="author">
-                <span th:text="${post.user.email}"></span>
+                <a th:text="${post.user.email}" th:href="@{'/personal/'+${post.user.id}}"></a>
             </div>
         </div>
         <div class="row justify-content-end row-cols-4" id="date">

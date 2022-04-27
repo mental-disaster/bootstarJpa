@@ -4,12 +4,12 @@
 <th:block th:fragment="header">
     <div class="container" id="headerContainer">
         <header class="d-flex mb-3 py-3">
-            <img class="me-auto" id="logo" onclick="location.href='hello'" th:src="@{/assets/bootstrap.svg}">
-            <button th:if="${#strings.contains(#httpServletRequest.getRequestURL(), 'hello')}" type="button" class="btn btn-outline-primary me-2" onclick="location.href='personal'">
-                개인페이지
+            <img class="me-auto" id="logo" onclick="location.href='/hello'" th:src="@{/assets/bootstrap.svg}">
+            <button th:if="${#strings.contains(#httpServletRequest.getRequestURL(), 'hello')} or ${posts[0].user.id}!=${user.id}" type="button" class="btn btn-outline-primary me-2" th:onclick="|location.href='/personal/${user.id}'|">
+                마이페이지
             </button>
-            <button th:if="${#strings.contains(#httpServletRequest.getRequestURL(), 'personal')}" type="button" class="btn btn-outline-primary me-2" onclick="location.href='hello'">
-                메인화면
+            <button th:if="${#strings.contains(#httpServletRequest.getRequestURL(), 'personal')}" type="button" class="btn btn-outline-primary me-2" onclick="location.href='/hello'">
+                메인페이지
             </button>
             <button type="button" onclick="location.href='logout'" class="btn btn-primary">로그아웃</button>
         </header>
