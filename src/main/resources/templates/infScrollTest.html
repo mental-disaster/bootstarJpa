@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/timeline.css}" rel="stylesheet"/>
+    <link th:href="@{/css/upload.css}" rel="stylesheet"/>
+    <link th:href="@{/css/header.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="timelineContainer">
+    <div id="item">시작점</div>
+</div>
+<a th:href="@{'/post?page=0&limit=3'}" id="next"></a>
+<a id="prev"></a>
+
+<script th:src="@{js/infiniteScroll.js}" rel="script"></script>
+<script>
+    infiniteScroll({
+        container: "#timelineContainer",
+        item: "#timelineItem",
+        next: "#next",
+        prev: "#prev"
+    })
+</script>
+</body>
+</html>

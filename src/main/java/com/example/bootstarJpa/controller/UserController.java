@@ -92,4 +92,9 @@ public class UserController {
         model.addAttribute("posts",posts);
         return "/personal";
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "/infScrollTest";
+    }
 }

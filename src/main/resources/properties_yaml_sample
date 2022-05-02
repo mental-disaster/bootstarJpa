@@ -13,8 +13,5 @@ spring:
       filter:
         enabled: true
 
-  jpa:
-    show-sql: true
-
 fileUrl:
   imgUrl: {이미지파일url}

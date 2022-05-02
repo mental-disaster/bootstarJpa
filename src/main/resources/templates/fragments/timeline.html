@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 <th:block th:fragment="timelineFragment">
-    <div class="container border border-3 border-info rounded-3" id="TLContainer" th:each="post:${posts}">
+    <div class="container border border-3 border-info rounded-3" id="timelineItem" th:each="post:${posts}">
         <div class="row">
             <div class="col" id="author">
                 <a th:text="${post.user.email}" th:href="@{'/personal/'+${post.user.id}}"></a>
@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <img th:src="@{'/image/'+${post.img.id}}"/>
+                <img th:src="'/uploadFiles/img/'+${post.user.id}+'/'+${post.img.name}"/>
             </div>
         </div>
         <div class="row" id="caption">

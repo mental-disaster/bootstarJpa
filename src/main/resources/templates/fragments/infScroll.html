@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="timelineFragment">
+    <div id="timelineContainer">
+    </div>
+    <a th:href="@{'/post?page=0&limit=3'}" id="next"></a>
+    <a id="prev"></a>
+
+    <script th:src="@{js/infiniteScroll.js}" rel="script"></script>
+    <script>
+        infiniteScroll({
+            container: "#timelineContainer",
+            item: "#timelineItem",
+            next: "#next",
+            prev: "#prev"
+        })
+    </script>
+</th:block>
+</body>
+</html>

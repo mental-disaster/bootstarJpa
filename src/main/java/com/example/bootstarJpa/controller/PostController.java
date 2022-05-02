@@ -1,12 +1,15 @@
 package com.example.bootstarJpa.controller;
 
 import com.example.bootstarJpa.model.Post;
+import com.example.bootstarJpa.model.User;
 import com.example.bootstarJpa.model.vo.PostVo;
 import com.example.bootstarJpa.model.vo.mapper.PostMapper;
 import com.example.bootstarJpa.service.ImgService;
 import com.example.bootstarJpa.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,16 +28,18 @@ public class PostController {
     final ImgService imgService;
     final PostMapper postMapper;
 
-    @ResponseBody
     @GetMapping("")
-    public List<PostVo> selectLimitPost(@RequestParam int page, @RequestParam int limit){
+    public String selectLimitPost(Model model, @RequestParam int page, @RequestParam int limit, Authentication authentication){
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("user", user);
         List<Post> posts = postService.selectLimitPost(page, limit);
-        System.out.println(posts.get(0).getId());
         List<PostVo> postVos = posts.stream()
                 .map(postMapper::mapEntityVo)
                 .collect(Collectors.toList());
-        System.out.println(postVos);
-        return postVos;
+        model.addAttribute("posts", posts);
+        int nextPage = page + 1;
+        model.addAttribute("nextPage", nextPage);
+        return "paging";
     }
 
     @PostMapping("")

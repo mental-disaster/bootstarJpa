@@ -23,7 +23,6 @@
     <div class="form-floating">
       <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Email address</label>
-      <span th:text="${emailError}" style="color: #dc3545"></span>
     </div>
     <div class="form-floating">
       <input type="password" name="password" class="form-control" id="pw" placeholder="Password">
@@ -32,6 +31,7 @@
     <div class="form-floating">
       <input type="password" name="passwordConfirm" class="form-control" id="pwc" style="margin-bottom: 10px;" placeholder="Password Confirm">
       <label for="pwc">Password Confirm</label>
+      <span th:text="${emailError}" style="color: #dc3545"></span>
       <span th:text="${passwordError}" style="color: #dc3545"></span>
       <span id="wrongLen" style="color: #dc3545"></span>
       <span id="notMatch" style="color: #dc3545"></span>
